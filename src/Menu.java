@@ -8,10 +8,7 @@ public class Menu {
     // TODO create menu
     // https://www.youtube.com/watch?v=zCjY59M8qtY
 
-    void mainMenu() {
-        Race race = new Race();
-//        race.defaultRace(race);
-
+    void mainMenu(Race race) {
         int userIsSelected;
         do{
             userIsSelected = menuOptions();
@@ -61,9 +58,9 @@ public class Menu {
                     System.out.println("Enter the speed:");
                     int speed = inputInt();
                     Motorbike motorbike = new Motorbike(brand, model, speed);
-                    race.addVehicle(motorbike);
+                    race.addVehicle(race, motorbike);
                     System.out.println("\n");
-                    mainMenu();
+                    mainMenu(race);
                     break;
                 case 2:
                     System.out.println("Enter the brand:");
@@ -73,13 +70,13 @@ public class Menu {
                     System.out.println("Enter the speed:");
                     speed = inputInt();
                     Car car = new Car(brand, model, speed);
-                    race.addVehicle(car);
+                    race.addVehicle(race, car);
                     System.out.println("\n");
-                    mainMenu();
+                    mainMenu(race);
                     break;
                 case 3:
                     System.out.println("\n");
-                    mainMenu();
+                    mainMenu(race);
                     break;
                 default:
                     System.out.println("Please select a valid choice.\n");
@@ -98,13 +95,21 @@ public class Menu {
                     mainEnterAnotherVehicle(race);
                     break;
                 case 2:
-                    System.out.println("\n");
-                    int length = enterTheLength();
-                    race.startARace(race, length);
+                    if(!race.competitionVehicles.isEmpty()
+//                            && !race.vehicles.isEmpty()
+                    ){
+                        System.out.println("\n");
+                        int length = enterTheLength();
+                        race.startARace(race, length);
+                    }
+                    else {
+                        System.out.println("Please, add vehicles before starting the race!\n");
+                        mainMenu(race);
+                    }
                     break;
                 case 3:
                     System.out.println("\n");
-                    mainMenu();
+                    mainMenu(race);
                     break;
                 default:
                     System.out.println("Please select a valid choice.\n");
@@ -148,7 +153,7 @@ public class Menu {
     }
 
     public String inputString(){
-        String selection = "noSelection";
+        String selection;
         Scanner input = new Scanner(System.in);
         selection = input.next();
         return selection;
@@ -208,7 +213,7 @@ public class Menu {
     }
 
     public int enterTheLength(){
-        System.out.println("Enter the legth of the track:");
+        System.out.println("Enter the length of the track:");
         int length = inputInt();
         if(!(length>0)){
             System.out.println("Please select a valid choice. (Greater than zero.)\n");

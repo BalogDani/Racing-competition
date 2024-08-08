@@ -10,14 +10,14 @@ public class Race {
     }
 
     public Race defaultRace(Race race){
-        race.addVehicle(new Car("Volvo", "XC60", 210));
-        race.addVehicle(new Motorbike("Yamaha", "R6", 260));
-        race.addVehicle(new Car("Renault", "Clio", 170));
+        race.addVehicle(race, new Car("Volvo", "XC60", 210));
+        race.addVehicle(race, new Motorbike("Yamaha", "R6", 260));
+        race.addVehicle(race, new Car("Renault", "Clio", 170));
         return race;
     }
 
-    public void addVehicle(Vehicle vehicle){
-        this.vehicles.add(vehicle);
+    public void addVehicle(Race race, Vehicle vehicle){
+        race.vehicles.add(vehicle);
         System.out.println("Vehicle " + vehicle.brand + " " + vehicle.type + " added to the race vehicles.");
     }
 

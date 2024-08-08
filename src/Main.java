@@ -5,8 +5,11 @@ public class Main {
         System.out.println("Hello and welcome!");
 
         // TODO start here
+        Race race = new Race();
+//        race.defaultRace(race);
+
         Menu menu = new Menu();
-        menu.mainMenu();
+        menu.mainMenu(race);
 
     }
 }
